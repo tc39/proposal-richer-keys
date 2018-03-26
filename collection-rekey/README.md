@@ -47,7 +47,7 @@ Having specialized identity conflicts with the idea of having multiple kinds of 
 
 ### Why not encourage extending collections?
 
-1. This would be resistant to prototype crawling such as:
+1. This would be succeptible to prototype crawling such as:
 
 ```mjs
 myCustomMap.__proto__.get.call(myCustomMap, key);
@@ -70,6 +70,8 @@ class MyMap extends Map {
 ```
 
 If we add something like `emplace()` this code now needs to be updated or it will have bugs if people expect it to work like a standard Map.
+
+This is roughly [the fragile base class problem](https://en.wikipedia.org/wiki/Fragile_base_class), where `Map` is the base class.
 
 3. Even if this is a userland solution, it seems prudent to allow easier usage of maps. We should aim to alleviate developers without requiring that all new features have new kernel semantics. I spoke of this with respect to [expanding the standard library](https://docs.google.com/presentation/d/1QSwQYJz4c1VESEKTWPqrAPbDn_y9lTBBjaWRjej1c-w/view#slide=id.p).
 
