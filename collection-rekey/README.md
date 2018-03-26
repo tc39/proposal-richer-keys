@@ -50,7 +50,7 @@ Having specialized identity conflicts with the idea of having multiple kinds of 
 1. This would be resistant to prototype crawling such as:
 
 ```mjs
-myCustomMap.__proto__.get(myCustomMap, key);
+myCustomMap.__proto__.get.call(myCustomMap, key);
 ```
 
 which would somewhat invalidate the idea of checking types of keys.
