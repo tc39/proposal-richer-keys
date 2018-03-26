@@ -55,7 +55,7 @@ myCustomMap.__proto__.get(myCustomMap, key);
 
 which would somewhat invalidate the idea of checking types of keys.
 
-2. It prevents needing to synchronize all of the methods which is a fair amaount of boiler plate and potential place for code going out of sync. It also means that your custom implementation will work even if new methods are added to collections in the JS standard library:
+2. It prevents needing to synchronize all of the methods which is a fair amount of boiler plate and potential place for code going out of sync. It also means that your custom implementation will work even if new methods are added to collections in the JS standard library:
 
 ```mjs
 class MyMap extends Map {
