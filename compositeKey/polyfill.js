@@ -49,7 +49,7 @@ module.exports = (...parts) => {
     }
   }
   if (refs.length === 0) {
-    throw new ReferenceError('Composite keys must contain a non-primitive component');
+    throw new TypeError('Composite keys must contain a non-primitive component');
   }
   for (const {value, i} of refs) {
     node = node.emplaceLifetime(value, i);
