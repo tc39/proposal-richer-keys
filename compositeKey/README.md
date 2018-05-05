@@ -52,3 +52,7 @@ myValues.set(myKey, components);
 
 let [a, b] = myValues.get(myKey);
 ```
+
+### How can I create an "immortal" composite key composed only of primitives?
+
+You cannot, but you can always use the `compositeKey` function as the first argument when calling `compositeKey` to make a key that is able to be retrieved as long as `compositeKey` is alive.
