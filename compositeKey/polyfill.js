@@ -2,8 +2,13 @@
 class CompositeNode {
   constructor() {
     this.primitiveNodes = new Map;
-    this.hasValue = false;
     this.value = null;
+  }
+  get() {
+    if (this.value === null) {
+      return this.value = node.value = Object.freeze({__proto__: null});
+    }
+    return this.value;
   }
   emplacePrimitive(position, value) {
     if (!this.primitiveNodes.has(value)) {
@@ -36,31 +41,22 @@ const compoundStore = new CompositeNodeWithLifetime();
 // accepts multiple objects as a key and does identity on the parts of the iterable
 module.exports = (...parts) => {
   let node = compoundStore;
-  let hasNonPrimitive = false;
-  let refs = [];
-  let primitives = [];
   for (let i = 0; i < parts.length; i++) {
     const value = parts[i];
-    let map;
     if (value === null || typeof value === 'object' || typeof value === 'function') {
-      refs.push({i, value});
-    } else {
-      primitives.push({i, value});
+      node = node.emplaceLifetime(value, i);
     }
   }
-  if (refs.length === 0) {
+  // does not leak WeakMap paths since there are none added
+  if (node === compoundStore) {
     throw new TypeError('Composite keys must contain a non-primitive component');
   }
-  for (const {value, i} of refs) {
-    node = node.emplaceLifetime(value, i);
+  for (let i = 0; i < parts.length; i++) {
+    const value = parts[i];
+    if (!(value === null || typeof value === 'object' || typeof value === 'function')) {
+      node = node.emplacePrimitive(value, i);
+    }
   }
-  for (const {value, i} of primitives) {
-    node = node.emplacePrimitive(value, i);
-  }
-  if (!node.hasValue) {
-    node.hasValue = true;
-    node.value = Object.freeze({__proto__: null});
-  }
-  return node.value;
+  return node.get();
 };
 
