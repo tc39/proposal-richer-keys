@@ -1,4 +1,5 @@
 'use strict';
+const hasLifetime = value => value === null || typeof value === 'object' || typeof value === 'function';
 class CompositeNode {
   constructor() {
     this.primitiveNodes = new Map;
@@ -43,7 +44,7 @@ module.exports = (...parts) => {
   let node = compoundStore;
   for (let i = 0; i < parts.length; i++) {
     const value = parts[i];
-    if (value === null || typeof value === 'object' || typeof value === 'function') {
+    if (hasLifetime(value)) {
       node = node.emplaceLifetime(value, i);
     }
   }
@@ -53,7 +54,7 @@ module.exports = (...parts) => {
   }
   for (let i = 0; i < parts.length; i++) {
     const value = parts[i];
-    if (!(value === null || typeof value === 'object' || typeof value === 'function')) {
+    if (!hasLifetime(value)) {
       node = node.emplacePrimitive(value, i);
     }
   }
