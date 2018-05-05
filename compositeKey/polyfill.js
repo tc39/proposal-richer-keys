@@ -42,7 +42,7 @@ module.exports = (...parts) => {
   for (let i = 0; i < parts.length; i++) {
     const value = parts[i];
     let map;
-    if (typeof value === 'object' || typeof value === 'function') {
+    if (value === null || typeof value === 'object' || typeof value === 'function') {
       refs.push({i, value});
     } else {
       primitives.push({i, value});
