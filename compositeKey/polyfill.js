@@ -1,5 +1,5 @@
 'use strict';
-const hasLifetime = value => value === null || typeof value === 'object' || typeof value === 'function';
+const hasLifetime = value => value !== null && (typeof value === 'object' || typeof value === 'function');
 class CompositeNode {
   constructor() {
     this.primitiveNodes = new Map;
@@ -7,11 +7,11 @@ class CompositeNode {
   }
   get() {
     if (this.value === null) {
-      return this.value = node.value = Object.freeze({__proto__: null});
+      return this.value = Object.freeze({__proto__: null});
     }
     return this.value;
   }
-  emplacePrimitive(position, value) {
+  emplacePrimitive(value, position) {
     if (!this.primitiveNodes.has(value)) {
       this.primitiveNodes.set(value, new Map);
     }
