@@ -14,6 +14,15 @@ assert.throws(() => compositeKey(1));
 assert.throws(() => compositeKey(true));
 assert.throws(() => compositeKey(""));
 assert.throws(() => compositeKey(Symbol()));
+assert.throws(() => compositeKey(undefined));
+for (const _ of [null, 1, true, "", Symbol()]) {
+  assert.throws(() => compositeKey(null, _));
+  assert.throws(() => compositeKey(Symbol(), _));
+  assert.throws(() => compositeKey(_, 1));
+  assert.throws(() => compositeKey(_, undefined));
+  assert.throws(() => compositeKey(_, true, _));
+  assert.throws(() => compositeKey(_, "", _));
+}
 assert.strictEqual(compositeKey(a, 0), compositeKey(a, 0));
 assert.notStrictEqual(compositeKey(a, 0), compositeKey(a, 1));
 assert.notStrictEqual(compositeKey(a, 0), compositeKey(0, a));
