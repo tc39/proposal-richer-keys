@@ -6,7 +6,7 @@ This proposal seeks to add APIs to create composite keys while still allowing th
 
 In all APIs order of arguments is preserved in the path to the key. `compositeKey(a, b)` is different from `compositeKey(b, a)`.
 
-`compositeKey` requires at least one component must be a valid `WeakMap` key. This is because the main use case for `compositeKey` is to allow GC to occur when the lifetime of the components is ended. `compositeSymbol` is for strongly puting the key on an Object and does not benefit from this.
+`compositeKey` requires at least one component must be a valid key that can be placed in a `WeakMap` . This is because the main use case for `compositeKey` is to allow GC to occur when the lifetime of the components is ended. `compositeSymbol` is for strongly puting the key on an Object and does not benefit from this.
 
 ```mjs
 compositeKey(...parts: [...any]) : Object.freeze({__proto__:null})
