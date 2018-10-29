@@ -1,0 +1,12 @@
+{
+  "name": "@bradleymeck/compositekey",
+  "version": "1.0.0",
+  "description": "This proposal seeks to add APIs to create composite keys while still allowing the components of the composite key to be GC'd.",
+  "main": "polyfill.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "bfarias@godaddy.com",
+  "license": "MIT"
+}
