@@ -59,11 +59,11 @@ contributors: Bradley Farias
           1. If NewTarget is *undefined*, throw a *TypeError* exception.
           1. Let _map_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%MapPrototype%"`, &laquo; [[MapData]], [[ToKey]], [[ToValue]] &raquo;).
           1. Set _map_.[[MapData]] to a new empty List.
-          <ins>
-          1. If _options_ is not present, or is either *undefined* or *null*
+          1. <ins class="block">If _options_ is not present, or is either *undefined* or *null*
             1. Set _map_.[[ToKey]] to *undefined*
             1. Set _map_.[[ToValue]] to *undefined*
-          1. Else,
+          </ins>
+          1. <ins class="block">Else,
             1. Set _map_.[[ToKey]] to Get(_options_, `"toKey"`).
             1. If _map_.[[ToKey]] is *null* set _map_.[[ToKey]] to *undefined*
             1. Set _map_.[[ToValue]] to Get(_options_, `"toValue"`).
@@ -87,10 +87,8 @@ contributors: Bradley Farias
         <li>has a [[Prototype]] internal slot whose value is the intrinsic object %ObjectPrototype%.</li>
         <li>is an ordinary object.</li>
         <li>does not have a [[MapData]] internal slot.</li>
-        <ins>
-        <li>does not have a [[ToKey]] internal slot.</li>
-        <li>does not have a [[ToValue]] internal slot.</li>
-        </ins>
+        <li><ins>does not have a [[ToKey]] internal slot.</ins></li>
+        <li><ins>does not have a [[ToValue]] internal slot.</ins></li>
       </ul>
 
       <emu-clause id="sec-map.prototype.delete">
@@ -100,9 +98,7 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[MapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
           1. Let _entries_ be the List that is _M_.[[MapData]].
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
             1. If _p_.[[Key]] is not ~empty~ and SameValueZero(_p_.[[Key]], <ins>_normalizedKey_</ins><del>_key_</del>) is *true*, then
@@ -123,9 +119,7 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[MapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
           1. Let _entries_ be the List that is _M_.[[MapData]].
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
             1. If _p_.[[Key]] is not ~empty~ and SameValueZero(_p_.[[Key]], <ins>_normalizedKey_</ins><del>_key_</del>) is *true*, return _p_.[[Value]].
@@ -140,9 +134,7 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[MapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
           1. Let _entries_ be the List that is _M_.[[MapData]].
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
             1. If _p_.[[Key]] is not ~empty~ and SameValueZero(_p_.[[Key]], <ins>_normalizedKey_</ins><del>_key_</del>) is *true*, return *true*.
@@ -157,10 +149,8 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[MapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          1. Let _normalizedValue_ be NormalizeToValue(_M_, _value_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_M_, _value_).</ins>
           1. Let _entries_ be the List that is _M_.[[MapData]].
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
             1. If _p_.[[Key]] is not ~empty~ and SameValueZero(_p_.[[Key]], <ins>_normalizedKey_</ins><del>_key_</del>) is *true*, then
@@ -202,10 +192,11 @@ contributors: Bradley Farias
           1. If NewTarget is *undefined*, throw a *TypeError* exception.
           1. Let _set_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%SetPrototype%"`, &laquo; [[SetData]] &raquo;).
           1. Set _set_.[[SetData]] to a new empty List.
-          <ins>
-          1. If _options_ is not present, or is either *undefined* or *null*
+          
+          1. <ins class="block">If _options_ is not present, or is either *undefined* or *null*
             1. Set _set_.[[ToValue]] to *undefined*
-          1. Else,
+          </ins>
+          1. <ins class="block">Else,
             1. Set _set_.[[ToValue]] to Get(_options_, `"toValue"`).
             1. If _set_.[[ToValue]] is *null* set _set_.[[ToValue]] to *undefined*
           </ins>
@@ -232,9 +223,7 @@ contributors: Bradley Farias
         <li>has a [[Prototype]] internal slot whose value is the intrinsic object %ObjectPrototype%.</li>
         <li>is an ordinary object.</li>
         <li>does not have a [[SetData]] internal slot.</li>
-        <ins>
-        <li>does not have a [[ToValue]] internal slot.</li>
-        </ins>
+        <li><ins>does not have a [[ToValue]] internal slot.</ins></li>
       </ul>
 
       <emu-clause id="sec-set.prototype.add">
@@ -244,9 +233,7 @@ contributors: Bradley Farias
           1. Let _S_ be the *this* value.
           1. If Type(_S_) is not Object, throw a *TypeError* exception.
           1. If _S_ does not have a [[SetData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedValue_ be NormalizeToValue(_S_, _value_).
-          </ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_S_, _value_).</ins>
           1. Let _entries_ be the List that is _S_.[[SetData]].
           1. For each _e_ that is an element of _entries_, do
             1. If _e_ is not ~empty~ and SameValueZero(_e_, <ins>_normalizedValue_</ins><del>_value_</del>) is *true*, then
@@ -264,9 +251,7 @@ contributors: Bradley Farias
           1. Let _S_ be the *this* value.
           1. If Type(_S_) is not Object, throw a *TypeError* exception.
           1. If _S_ does not have a [[SetData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedValue_ be NormalizeToValue(_S_, _value_).
-          </ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_S_, _value_).</ins>
           1. Let _entries_ be the List that is _S_.[[SetData]].
           1. For each _e_ that is an element of _entries_, do
             1. If _e_ is not ~empty~ and SameValueZero(_e_, <ins>_normalizedValue_</ins><del>_value_</del>) is *true*, then
@@ -286,9 +271,7 @@ contributors: Bradley Farias
           1. Let _S_ be the *this* value.
           1. If Type(_S_) is not Object, throw a *TypeError* exception.
           1. If _S_ does not have a [[SetData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedValue_ be NormalizeToValue(_S_, _value_).
-          </ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_S_, _value_).</ins>
           1. Let _entries_ be the List that is _S_.[[SetData]].
           1. For each _e_ that is an element of _entries_, do
             1. If _e_ is not ~empty~ and SameValueZero(_e_, <ins>_normalizedValue_</ins><del>_value_</del>) is *true*, return *true*.
@@ -327,11 +310,11 @@ contributors: Bradley Farias
           1. If NewTarget is *undefined*, throw a *TypeError* exception.
           1. Let _map_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%WeakMapPrototype%"`, &laquo; [[WeakMapData]] &raquo;).
           1. Set _map_.[[WeakMapData]] to a new empty List.
-          <ins>
-          1. If _options_ is not present, or is either *undefined* or *null*
+          1. <ins class="block">If _options_ is not present, or is either *undefined* or *null*
             1. Set _map_.[[ToKey]] to *undefined*
             1. Set _map_.[[ToValue]] to *undefined*
-          1. Else,
+          </ins>
+          1. <ins class="block">Else,
             1. Set _map_.[[ToKey]] to Get(_options_, `"toKey"`).
             1. If _map_.[[ToKey]] is *null* set _map_.[[ToKey]] to *undefined*
             1. Set _map_.[[ToValue]] to Get(_options_, `"toValue"`).
@@ -355,10 +338,8 @@ contributors: Bradley Farias
         <li>has a [[Prototype]] internal slot whose value is the intrinsic object %ObjectPrototype%.</li>
         <li>is an ordinary object.</li>
         <li>does not have a [[WeakMapData]] internal slot.</li>
-        <ins>
-        <li>does not have a [[ToKey]] internal slot.</li>
-        <li>does not have a [[ToValue]] internal slot.</li>
-        </ins>
+        <li><ins>does not have a [[ToKey]] internal slot.</ins></li>
+        <li><ins>does not have a [[ToValue]] internal slot.</ins></li>
       </ul>
 
       <emu-clause id="sec-weakmap.prototype.delete">
@@ -368,9 +349,7 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[WeakMapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
           1. Let _entries_ be the List that is _M_.[[WeakMapData]].
           1. If Type(_key_) is not Object, return *false*.
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
@@ -392,9 +371,7 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[WeakMapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
           1. Let _entries_ be the List that is _M_.[[WeakMapData]].
           1. If Type(_key_) is not Object, return *undefined*.
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
@@ -410,9 +387,7 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[WeakMapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
           1. Let _entries_ be the List that is _M_.[[WeakMapData]].
           1. If Type(_key_) is not Object, return *false*.
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
@@ -428,10 +403,8 @@ contributors: Bradley Farias
           1. Let _M_ be the *this* value.
           1. If Type(_M_) is not Object, throw a *TypeError* exception.
           1. If _M_ does not have a [[WeakMapData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedKey_ be NormalizeToKey(_M_, _key_).
-          1. Let _normalizedValue_ be NormalizeToValue(_M_, _value_).
-          </ins>
+          1. <ins>Let _normalizedKey_ be NormalizeToKey(_M_, _key_).</ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_M_, _value_).</ins>
           1. Let _entries_ be the List that is _M_.[[WeakMapData]].
           1. If Type(_key_) is not Object, throw a *TypeError* exception.
           1. For each Record { [[Key]], [[Value]] } _p_ that is an element of _entries_, do
@@ -472,10 +445,10 @@ contributors: Bradley Farias
           1. If NewTarget is *undefined*, throw a *TypeError* exception.
           1. Let _set_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%WeakSetPrototype%"`, &laquo; [[WeakSetData]] &raquo;).
           1. Set _set_.[[WeakSetData]] to a new empty List.
-          <ins>
-          1. If _options_ is not present, or is either *undefined* or *null*
+          1. <ins class="block">If _options_ is not present, or is either *undefined* or *null*
             1. Set _map_.[[ToValue]] to *undefined*
-          1. Else,
+          </ins>
+          1. <ins class="block">Else,
             1. Set _map_.[[ToValue]] to Get(_options_, `"toValue"`).
             1. If _map_.[[ToValue]] is *null* set _map_.[[ToValue]] to *undefined*
           </ins>
@@ -511,9 +484,7 @@ contributors: Bradley Farias
           1. Let _S_ be the *this* value.
           1. If Type(_S_) is not Object, throw a *TypeError* exception.
           1. If _S_ does not have a [[WeakSetData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedValue_ be NormalizeToValue(_S_, _value_).
-          </ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_S_, _value_).</ins>
           1. If Type(_value_) is not Object, throw a *TypeError* exception.
           1. Let _entries_ be the List that is _S_.[[WeakSetData]].
           1. For each _e_ that is an element of _entries_, do
@@ -531,9 +502,7 @@ contributors: Bradley Farias
           1. Let _S_ be the *this* value.
           1. If Type(_S_) is not Object, throw a *TypeError* exception.
           1. If _S_ does not have a [[WeakSetData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedValue_ be NormalizeToValue(_S_, _value_).
-          </ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_S_, _value_).</ins>
           1. If Type(_value_) is not Object, return *false*.
           1. Let _entries_ be the List that is _S_.[[WeakSetData]].
           1. For each _e_ that is an element of _entries_, do
@@ -554,9 +523,7 @@ contributors: Bradley Farias
           1. Let _S_ be the *this* value.
           1. If Type(_S_) is not Object, throw a *TypeError* exception.
           1. If _S_ does not have a [[WeakSetData]] internal slot, throw a *TypeError* exception.
-          <ins>
-          1. Let _normalizedValue_ be NormalizeToValue(_S_, _value_).
-          </ins>
+          1. <ins>Let _normalizedValue_ be NormalizeToValue(_S_, _value_).</ins>
           1. Let _entries_ be the List that is _S_.[[WeakSetData]].
           1. If Type(_value_) is not Object, return *false*.
           1. For each _e_ that is an element of _entries_, do
