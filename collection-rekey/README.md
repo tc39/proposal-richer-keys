@@ -1,6 +1,6 @@
-# Collection {rekey}
+# Collection {toKey, toValue}
 
-This proposal seeks to add a `rekey` parameter to collection creation.
+This proposal seeks to add a `toKey` and `toValue` parameter to collection creation.
 
 ## Use cases
 
@@ -10,7 +10,7 @@ Given an application with User Objects it may be desirable to create collections
 
 ```mjs
 new Map(undefined, {
-  rekey({email}) {
+  toKey({email}) {
     return email;
   }
 });
@@ -18,7 +18,7 @@ new Map(undefined, {
 
 ```mjs
 new Set(undefined, {
-  rekey({username}) {
+  toValue({username}) {
     return username;
   }
 });
@@ -30,7 +30,7 @@ It is a common occurance to want to check types when performaning operations on 
 
 ```mjs
 new Map(undefined, {
-  rekey(user) {
+  toKey(user) {
     if (user instanceof User !== true) {
       throw new TypeError('Expected User for key');
     }
@@ -48,6 +48,26 @@ A collection of references can be found via [this document](https://docs.google.
 Generally it falls into using container types. If you wanted to create a `Map` of `People` by `person.email`. You would implement a wrapper class `PersonByEmail` to use as your key, and others for keying of other aspects. Static typing and compiler/language enforced coercion can alleviate problems with misusing collections, but wrapping and unwrapping is manual in scenarios with dynamic typing that cannot be coerced automatically.
 
 This proposal would provide a hook to do that manual wrapping and unwrapping without requiring the user of a collection to remain vigilant about properly marshalling keys before providing them to the collection.
+
+### When are the normalization steps applied?
+
+Normalization is applied when data is incoming to find the identity of the key location in `[[MapData]]` and when placing the value in `[[SetData]]` or `[[MapData]]`. e.g.
+
+```mjs
+const map = new Map([], {
+  toKey: String
+});
+// stored using { [[Key]]: "1", [[Value]]: "one" } in map.[[MapData]]
+map.set(1, 'one');
+// looks for corresponding { [[Key]]: 1 } in map.[[MapData]]
+mah.has(1);
+```
+
+Normalization is not done when iterating or returning internal data, it is only done on parameters.
+
+### Why are Sets only given `toValue`?
+
+Sets are collections of values, and do not have a mapping operation from one value to another.
 
 ### Why not `value[Symbol.toKey]`?
 
