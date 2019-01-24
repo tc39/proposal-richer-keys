@@ -12,6 +12,11 @@ Given an application with User Objects it may be desirable to create collections
 new Map(undefined, {
   toKey({email}) {
     return email;
+  },
+  toValue(state) {
+    return state instanceof AccountState ? 
+      state :
+      new AccountState(state);
   }
 });
 ```
