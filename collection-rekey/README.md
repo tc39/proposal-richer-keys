@@ -63,6 +63,14 @@ map.set(1, 'one');
 map.has(1); // true
 // functions directly exposing the underlying entry list are unaffected
 [...map.entries()]; // [["1", "one"]]
+
+const set = new Set([], {toValue: JSON.stringify});
+// stored using { [[Value]]: '{"path": "/foo"}' } in set.[[SetData]]
+set.add({path: '/foo'});
+// looks for corresponding { [[Value]]: '{"path": "/foo"}' } in set.[[SetData]]
+set.has({path: '/foo')};
+// functions directly exposing the underlying entry list are unaffected
+[...set]; // ['{"path": "/foo"}']
 ```
 
 Normalization is not done when iterating or returning internal data, it is only done on parameters.
