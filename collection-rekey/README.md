@@ -34,7 +34,7 @@ new Map(undefined, {
     if (user instanceof User !== true) {
       throw new TypeError('Expected User for key');
     }
-    return username;
+    return user;
   }
 });
 ```
