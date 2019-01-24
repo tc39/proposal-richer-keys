@@ -2,6 +2,8 @@
 
 This proposal seeks to add a `toKey` and `toValue` parameter to collection creation.
 
+[Rendered Spec](https://tc39.github.io/proposal-richer-keys/collection-rekey/index.html)
+
 ## Use cases
 
 ### Specialized maps
