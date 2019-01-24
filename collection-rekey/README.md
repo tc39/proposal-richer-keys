@@ -60,7 +60,9 @@ const map = new Map([], {
 // stored using { [[Key]]: "1", [[Value]]: "one" } in map.[[MapData]]
 map.set(1, 'one');
 // looks for corresponding { [[Key]]: "1" } in map.[[MapData]]
-mah.has(1);
+map.has(1); // true
+// functions directly exposing the underlying entry list are unaffected
+[...map.entries()]; // [["1", "one"]]
 ```
 
 Normalization is not done when iterating or returning internal data, it is only done on parameters.
