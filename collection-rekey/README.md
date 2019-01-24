@@ -59,7 +59,7 @@ const map = new Map([], {
 });
 // stored using { [[Key]]: "1", [[Value]]: "one" } in map.[[MapData]]
 map.set(1, 'one');
-// looks for corresponding { [[Key]]: 1 } in map.[[MapData]]
+// looks for corresponding { [[Key]]: "1" } in map.[[MapData]]
 mah.has(1);
 ```
 
