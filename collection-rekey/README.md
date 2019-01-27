@@ -7,6 +7,7 @@ This proposal seeks to add a `toKey` and `toValue` parameter to collection creat
 ## Status
 
 **Stage:** 1
+
 **Champion:** Bradley Farias (@bmeck)
 
 ## Motivation
