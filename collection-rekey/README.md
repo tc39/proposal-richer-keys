@@ -2,9 +2,37 @@
 
 This proposal seeks to add a `toKey` and `toValue` parameter to collection creation.
 
-[Rendered Spec](https://tc39.github.io/proposal-richer-keys/collection-rekey/index.html)
+[Rendered Spec][Specification]
 
-## Use cases
+## Status
+
+**Stage:** 1
+**Champion:** Bradley Farias (@bmeck)
+
+## Motivation
+
+Often times, developers are forced to marshal data through normalization processes when they insert it or look up data within a collection. This leads to subclassing, which is verbose and potentially fragile; or, relying on the collection consumer's vigilance. This proposal seeks to allow improved developer experience with specialization of collection types by allowing automated marshalling for common workflows.
+
+## API
+
+```mjs
+new Map([], {
+  toKey(key) {return normalizedKey;},
+  toValue(value) {return normalizedValue;},
+});
+new WeakMap([], {
+  toKey(key) {return normalizedKey;},
+  toValue(value) {return normalizedValue;},
+});
+new Set([], {
+  toValue(value) {return normalizedValue;},
+});
+new WeakSet([], {
+  toValue(value) {return normalizedValue;},
+});
+```
+
+## Examples
 
 ### Specialized maps
 
@@ -121,3 +149,47 @@ This is roughly [the fragile base class problem](https://en.wikipedia.org/wiki/F
 3. Even if this is a userland solution, it seems prudent to allow easier usage of maps. We should aim to alleviate developers without requiring that all new features have new kernel semantics. I spoke of this with respect to [expanding the standard library](https://docs.google.com/presentation/d/1QSwQYJz4c1VESEKTWPqrAPbDn_y9lTBBjaWRjej1c-w/view#slide=id.p).
 
 4. Composition, while extending is nice it doesn't always allow for simple chaining and composition of features. If we introduce `RekeyableMap` as a concrete base class it may conflict with other base classes that may be introduced like if there was `InsertIfMissingMap`. Since both are base classes it would not allow both features to be combined easily.
+
+# TODO
+
+The following is a high-level list of tasks to progress through each stage of the [TC39 proposal process](https://tc39.github.io/process-document/):
+
+### Stage 1 Entrance Criteria
+
+* [x] Identified a "[champion][Champion]" who will advance the addition.
+* [x] [Prose][Prose] outlining the problem or need and the general shape of a solution.
+* [x] Illustrative [examples][Examples] of usage.
+* [x] High-level [API][API].
+
+### Stage 2 Entrance Criteria
+
+* [x] [Initial specification text][Specification].
+* [ ] [Transpiler support][Transpiler] (_Optional_).
+
+### Stage 3 Entrance Criteria
+
+* [ ] [Complete specification text][Specification].
+* [ ] Designated reviewers have [signed off][Stage3ReviewerSignOff] on the current spec text.
+* [ ] The ECMAScript editor has [signed off][Stage3EditorSignOff] on the current spec text.
+
+### Stage 4 Entrance Criteria
+
+* [ ] [Test262](https://github.com/tc39/test262) acceptance tests have been written for mainline usage scenarios and [merged][Test262PullRequest].
+* [ ] Two compatible implementations which pass the acceptance tests: [\[1\]][Implementation1], [\[2\]][Implementation2].
+* [ ] A [pull request][Ecma262PullRequest] has been sent to tc39/ecma262 with the integrated spec text.
+* [ ] The ECMAScript editor has signed off on the [pull request][Ecma262PullRequest].
+
+
+
+[Champion]: #status
+[Prose]: #motivations
+[Examples]: #examples
+[API]: #api
+[Specification]: https://tc39.github.io/proposal-richer-keys/collection-rekey/index.html
+[Transpiler]: #todo
+[Stage3ReviewerSignOff]: #todo
+[Stage3EditorSignOff]: #todo
+[Test262PullRequest]: #todo
+[Implementation1]: #todo
+[Implementation2]: #todo
+[Ecma262PullRequest]: #todo
